@@ -13,7 +13,7 @@ public record CourseActivityDto()
 
     public long? ProfessionalId { get; set; }
 
-    public CourseDto? Course { get; set; }
+    public CoursesDto? Course { get; set; }
 
     public CourseActivityTypeDto? ActivityType { get; set; }
 

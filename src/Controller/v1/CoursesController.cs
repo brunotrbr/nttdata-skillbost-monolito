@@ -7,9 +7,9 @@ namespace src.Controller.v1
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CoursesController(ICourseService courseService, ICourseActivityService courseActivityService) : ControllerBase
+    public class CoursesController(ICoursesService coursesService, ICourseActivityService courseActivityService) : ControllerBase
     {
-        private readonly ICourseService _courseService = courseService ?? throw new ArgumentNullException(nameof(courseService));
+        private readonly ICoursesService _coursesService = coursesService ?? throw new ArgumentNullException(nameof(coursesService));
         private readonly ICourseActivityService _courseActivityService = courseActivityService ?? throw new ArgumentNullException(nameof(courseActivityService));
 
         [HttpGet]
@@ -29,38 +29,38 @@ namespace src.Controller.v1
 
         [HttpGet]
         [Route("")]
-        public async Task<ActionResult<List<Course>>> List()
+        public async Task<ActionResult<List<Courses>>> List()
         {
-            return Ok(await _courseService.List());
+            return Ok(await _coursesService.List());
         }
 
         [HttpGet]
         [Route("{courseId:long}")]
-        public async Task<ActionResult<Course>> Get(long courseId)
+        public async Task<ActionResult<Courses>> Get(long courseId)
         {
-            return Ok(await _courseService.Get(courseId));
+            return Ok(await _coursesService.Get(courseId));
         }
 
         [HttpPost]
         [Route("")]
-        public async Task<ActionResult<Course>> Create([FromBody] CourseDto courseDto)
+        public async Task<ActionResult<Courses>> Create([FromBody] CoursesDto courseDto)
         {
-            var createdCourse = await _courseService.Create(courseDto);
+            var createdCourse = await _coursesService.Create(courseDto);
             return CreatedAtAction(nameof(Get), new { courseId = createdCourse.Id }, createdCourse);
         }
 
         [HttpPatch]
         [Route("{courseId:long}")]
-        public async Task<ActionResult> Update(long courseId, [FromBody] CourseDto courseDto)
+        public async Task<ActionResult> Update(long courseId, [FromBody] CoursesDto courseDto)
         {
-            return Ok(await _courseService.Update(courseId, courseDto));
+            return Ok(await _coursesService.Update(courseId, courseDto));
         }
 
         [HttpDelete]
         [Route("{courseId:long}")]
         public async Task<ActionResult> Delete(long courseId)
         {
-            await _courseService.Delete(courseId);
+            await _coursesService.Delete(courseId);
             return NoContent();
         }
     }

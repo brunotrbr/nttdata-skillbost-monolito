@@ -8,7 +8,7 @@ public class CourseActivity(CourseActivityDto courseActivityDto)
 
     public int Score { get; set; } = courseActivityDto.Score ?? 0;
 
-    public Course? Course { get; set; } = courseActivityDto.Course != null ? new Course(courseActivityDto.Course) : null;
+    public Courses? Course { get; set; } = courseActivityDto.Course != null ? new Courses(courseActivityDto.Course) : null;
 
     public CourseActivityType? ActivityType { get; set; } = courseActivityDto.ActivityType != null ? new CourseActivityType(courseActivityDto.ActivityType) : null;
 
@@ -23,7 +23,7 @@ public class CourseActivity(CourseActivityDto courseActivityDto)
 
         if (courseActivityDto.Course != null)
         {
-            Course = new Course(courseActivityDto.Course);
+            Course = new Courses(courseActivityDto.Course);
         }
 
         if (courseActivityDto.ActivityType != null)

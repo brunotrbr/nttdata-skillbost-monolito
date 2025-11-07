@@ -5,14 +5,14 @@ using src.Service.Interface;
 
 namespace src.Service;
 
-public class CourseActivityService(ICourseActivityRepository courseActivityRepository, ICourseService courseService) : ICourseActivityService
+public class CourseActivityService(ICourseActivityRepository courseActivityRepository, ICoursesService coursesService) : ICourseActivityService
 {
     private readonly ICourseActivityRepository _courseActivityRepository = courseActivityRepository;
-    private readonly ICourseService _courseService = courseService;
+    private readonly ICoursesService _coursesService = coursesService;
 
     public async Task<CourseActivity> Create(long courseId, CourseActivityDto courseActivityDto)
     {
-        var course = await _courseService.Get(courseId) ?? throw new KeyNotFoundException($"Course with id {courseId} not found.");
+        var course = await _coursesService.Get(courseId) ?? throw new KeyNotFoundException($"Course with id {courseId} not found.");
         var courseActivity = new CourseActivity(courseActivityDto)
         {
             Course = course

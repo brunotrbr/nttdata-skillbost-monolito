@@ -6,7 +6,7 @@ public record Progress
 
     public string Status { get; set; } = string.Empty;
 
-    public Course? Course { get; set; }
+    public Courses? Course { get; set; }
 
     public Professional? Professional { get; set; }
 

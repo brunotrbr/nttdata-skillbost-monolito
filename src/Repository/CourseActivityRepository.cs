@@ -1,4 +1,6 @@
 using System;
+using Npgsql;
+using src.Configs;
 using src.Domain.Dtos;
 using src.Domain.Models;
 using src.Repository.Interface;
